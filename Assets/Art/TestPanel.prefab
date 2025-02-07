@@ -267,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7592837636414237153}
   m_Layer: 5
-  m_Name: PolarExpeditionSubPanel
+  m_Name: TestPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
