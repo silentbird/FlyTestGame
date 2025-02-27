@@ -73,6 +73,8 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
+/Build/
+/HybridCLRData/
 *.apk
 *.aab
 *.unitypackage
