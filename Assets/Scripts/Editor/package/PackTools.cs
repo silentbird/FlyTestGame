@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using HotFix.core;
 using HybridCLR.Editor;
 using HybridCLR.Editor.Commands;
 using UnityEditor;
 using UnityEngine;
-using File = System.IO.File;
 
 public class PackTools {
 	[MenuItem("Tools/打包-新整包", false, 1012)]
@@ -28,7 +28,7 @@ public class PackTools {
 			var hotUpdateOutputDir = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(EditorUserBuildSettings.activeBuildTarget);
 			var srcPath = Path.Combine(hotUpdateOutputDir, hotfix_dll);
 			var dstPath = Path.Combine(Application.streamingAssetsPath, "asm/hotfix", hotfix_dll);
-			File.Copy(srcPath, dstPath, true);
+			FileTools.CopyFile(srcPath, dstPath);
 		}
 	}
 
@@ -39,7 +39,7 @@ public class PackTools {
 			var hotUpdateOutputDir = SettingsUtil.GetAssembliesPostIl2CppStripDir(EditorUserBuildSettings.activeBuildTarget);
 			var srcPath = Path.Combine(hotUpdateOutputDir, dll);
 			var dstPath = Path.Combine(Application.streamingAssetsPath, "asm/metadata", dll);
-			File.Copy(srcPath, dstPath, true);
+			FileTools.CopyFile(srcPath, dstPath);
 		}
 	}
 
