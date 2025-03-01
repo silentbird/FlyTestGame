@@ -1,6 +1,6 @@
 using Aot.debug;
 
-namespace Aot.load {
+namespace HotFix.module.load {
 	public class LoadModule : IModuleBase {
 		public void Init() {
 			Debugger.Log("LoadModule Init");

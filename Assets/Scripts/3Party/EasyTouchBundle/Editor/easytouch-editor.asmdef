@@ -1,0 +1,19 @@
+{
+    "name": "easytouch-editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:531a81edd279018418f07f3b280b785b",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,6 +1,8 @@
+using System.IO;
 using Aot.debug;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 namespace Aot.core {
@@ -21,9 +23,13 @@ namespace Aot.core {
 			UniTask.Create(start_game);
 		}
 
-		async private UniTask start_game() {
+		private async UniTask load_hotfix() {
+			var dll = (await UnityWebRequest.Get(Path.Combine(Application.persistentDataPath, "hotfix.dll")).SendWebRequest()).downloadHandler.data;
+		}
+
+		private async UniTask start_game() {
 			Debugger.Log("start_game");
-			await UniTask.Delay(5000);
+			await load_hotfix();
 			Debug.Log("after 5s");
 		}
 	}

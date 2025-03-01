@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Aot.core;
+using HotFix.module.load;
 using UnityEngine;
 
-namespace Aot {
+namespace HotFix.module {
 	public class ModuleManger : Singleton<ModuleManger> {
 		private readonly HashSet<IModuleBase> m_modules = new();
 
@@ -13,17 +14,13 @@ namespace Aot {
 		}
 
 		public void Start() {
-			foreach (var module in m_modules) {
-				module.Start();
-			}
+			foreach (var module in m_modules) module.Start();
 		}
 
 		public void Add<T>(bool enable = true) where T : IModuleBase, new() {
-			if (!enable) {
-				return;
-			}
+			if (!enable) return;
 
-			T module = new T();
+			var module = new T();
 			m_modules.Add(module);
 		}
 	}

@@ -1,5 +1,5 @@
-namespace Aot {
-	public class TouchModule : IModuleBase {
+namespace HotFix.module.load {
+	public class AssetModule : IModuleBase {
 		public void Init() {
 		}
 

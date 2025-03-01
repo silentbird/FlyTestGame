@@ -24,9 +24,6 @@ public class ToolbarReloadExtend {
 		set => PlayerPrefs.SetInt(WAITING_FOR_COMPILE_KEY, value ? 1 : 0);
 	}
 
-	// 上一次编译状态
-	private static bool _lastCompileState = false;
-
 	static ToolbarReloadExtend() {
 		EditorApplication.update -= OnUpdate;
 		EditorApplication.update += OnUpdate;
@@ -35,9 +32,7 @@ public class ToolbarReloadExtend {
 	}
 
 	private static void OnUpdate() {
-		// Relying on the fact that toolbar is ScriptableObject and gets deleted when layout changes
 		if (m_currentToolbar == null) {
-			// Find toolbar
 			var toolbars = Resources.FindObjectsOfTypeAll(m_toolbarType);
 			m_currentToolbar = toolbars.Length > 0 ? (ScriptableObject)toolbars[0] : null;
 			if (m_currentToolbar != null) {
@@ -69,6 +64,7 @@ public class ToolbarReloadExtend {
 	}
 
 	private const string Menu_OpenOrCloseErrorPanel = "Tools/重启并编译 %_r";
+
 	[MenuItem(Menu_OpenOrCloseErrorPanel, false, 1012)]
 	private static void ReloadGame() {
 		if (EditorApplication.isPlaying) {

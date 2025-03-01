@@ -1,4 +1,4 @@
-namespace Aot.module.load.AssetBundle {
+namespace HotFix.module.load.AssetBundle {
 	public class AssetBundData {
 		private string name;
 		private int refCnt;
