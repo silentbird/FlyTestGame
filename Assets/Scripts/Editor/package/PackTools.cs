@@ -48,8 +48,10 @@ public class PackTools {
 		var target = EditorUserBuildSettings.activeBuildTarget;
 		var name = Application.productName;
 		var targetPath = $"Build/{target}/{name}";
-		Directory.Delete($"Build/{target}", true);
-
+		var dirctName = Path.GetDirectoryName(targetPath);
+		if (File.Exists(dirctName)) {
+			Directory.Delete($"Build/{target}", true);
+		}
 		BuildPipeline.BuildPlayer(new[] { "Assets/Scenes/GameMain.unity" }, targetPath, target, buildPlayerOptions);
 	}
 }
