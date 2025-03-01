@@ -4,7 +4,6 @@ using UnityEditor;
 using System.Reflection;
 using UnityEngine.UIElements;
 
-
 [InitializeOnLoad]
 public class ToolbarReloadExtend {
 	private static Type m_toolbarType = typeof(Editor).Assembly.GetType("UnityEditor.Toolbar");
@@ -65,7 +64,7 @@ public class ToolbarReloadExtend {
 
 	private const string Menu_OpenOrCloseErrorPanel = "Tools/重启并编译 %_r";
 
-	[MenuItem(Menu_OpenOrCloseErrorPanel, false, 1012)]
+	[MenuItem(Menu_OpenOrCloseErrorPanel, false, 9999)]
 	private static void ReloadGame() {
 		if (EditorApplication.isPlaying) {
 			Debug.Log("停止播放，准备重新加载");

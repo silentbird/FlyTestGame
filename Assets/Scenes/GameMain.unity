@@ -690,6 +690,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c7265b771617d488f345e26384cba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hotfixDlls:
+  - hotfix
+  - easytouch-runtime
 --- !u!114 &7727705009391837336
 MonoBehaviour:
   m_ObjectHideFlags: 0

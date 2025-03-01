@@ -6,7 +6,7 @@ using HotFix.module;
 using HybridCLR;
 
 namespace HotFix.core {
-	public class HotFixEntry {
+	public static class HotFixEntry {
 		private static readonly IReadOnlyList<string> PatchedAOTAssemblyList = new List<string> {
 			"System.Core.dll",
 			"UnityEngine.CoreModule.dll",
@@ -15,16 +15,15 @@ namespace HotFix.core {
 			"mscorlib.dll",
 		};
 
-		public void Start() {
+		public static void Start() {
 			ModuleManger.Instance.Init();
+			Debugger.Log("这是一个TEst 111111111111111111");
 			UniTask.Create(LoadMetadata);
 		}
 
-		private async UniTask LoadMetadata() {
+		private static async UniTask LoadMetadata() {
 			foreach (var asm in PatchedAOTAssemblyList) {
-				//Get metadata real path
-				// Load asm
-				string file = Path.Combine(UnityEngine.Application.streamingAssetsPath, asm);
+				string file = Path.Combine(UnityEngine.Application.streamingAssetsPath, "asm/metadata", asm);
 				var bytes = await File.ReadAllBytesAsync(file);
 				LoadImageErrorCode result = RuntimeApi.LoadMetadataForAOTAssembly(bytes, HomologousImageMode.SuperSet);
 				if (result != LoadImageErrorCode.OK) {
