@@ -30,26 +30,28 @@ namespace Aot.core {
 			UniTask.Create(start_game);
 		}
 
-		private void editor_hotfix() {
+		private void editor_load_hotfix() {
 			foreach (var dll in hotfixDlls) {
 				Assembly a = AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == dll);
 				if (a == null) {
 					throw new Exception($"{dll} is nil");
 				}
 
+				Debugger.Log("editor_load_hotfix: " + dll);
 				_assemblies.TryAdd(dll, a);
 			}
 		}
 
-		private async UniTask load_hotfix() {
+		private async UniTask app_load_hotfix() {
 			foreach (var dll in hotfixDlls) {
 				try {
 					var bytes = (await UnityWebRequest.Get(Path.Combine(Application.streamingAssetsPath, $"ams/hotfix/{dll}.dll")).SendWebRequest()).downloadHandler.data;
 					var ass = Assembly.Load(bytes);
+					Debugger.Log("app_load_hotfix: " + dll);
 					_assemblies.TryAdd(dll, ass);
 				}
 				catch (Exception e) {
-					Console.WriteLine(e);
+					Debugger.LogError(e.Message);
 					throw;
 				}
 			}
@@ -74,9 +76,9 @@ namespace Aot.core {
 		private async UniTask start_game() {
 			Debugger.Log("start_game");
 #if UNITY_EDITOR
-			editor_hotfix();
+			editor_load_hotfix();
 #else
-			await load_hotfix();
+			await app_load_hotfix();
 #endif
 
 			await start_hotfix();
