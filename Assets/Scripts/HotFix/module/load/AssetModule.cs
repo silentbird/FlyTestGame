@@ -1,5 +1,5 @@
 namespace HotFix.module.load {
-	public class AssetModule : IModuleBase {
+	public class AssetModule : ModuleBase {
 		public void Init() {
 		}
 

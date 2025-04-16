@@ -17,8 +17,10 @@ namespace HotFix.core {
 
 		public static void Start() {
 			ModuleManger.Instance.Init();
-			Debugger.Log("这是一个TEst 111111111111111111");
-			UniTask.Create(LoadMetadata);
+			LoadMetadata().Forget();
+
+			ModuleManger.Instance.Init();
+			ModuleManger.Instance.StartGame();
 		}
 
 		private static async UniTask LoadMetadata() {
@@ -28,6 +30,9 @@ namespace HotFix.core {
 				LoadImageErrorCode result = RuntimeApi.LoadMetadataForAOTAssembly(bytes, HomologousImageMode.SuperSet);
 				if (result != LoadImageErrorCode.OK) {
 					Debugger.LogError("LoadMetadataForAOTAssembly failed: " + result);
+				}
+				else {
+					Debugger.Log("LoadMetadataForAOTAssembly success: " + asm);
 				}
 			}
 		}

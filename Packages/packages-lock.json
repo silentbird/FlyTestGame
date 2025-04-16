@@ -12,7 +12,20 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8042b29ff87dd5506d7aad72bd6d8d7405985f27"
+      "hash": "06067cd4c83e372310d6f79d1c625f6870ff7a2a"
+    },
+    "com.silentbird.fly-extools": {
+      "version": "0.0.18",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
@@ -31,7 +44,7 @@
       "hash": "2c0153a9bab1abc783e5599fa2d2cc3c69d5e389"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.34",
+      "version": "3.0.36",
       "depth": 0,
       "source": "registry",
       "dependencies": {

@@ -15,7 +15,7 @@ namespace Aot.core {
 	/// </summary>
 	public class GameMain : MonoBehaviour {
 		public List<string> hotfixDlls;
-		private Dictionary<string, Assembly> _assemblies = new();
+		private readonly Dictionary<string, Assembly> _assemblies = new();
 
 		private void Awake() {
 			DontDestroyOnLoad(gameObject);
@@ -23,12 +23,15 @@ namespace Aot.core {
 			Debug.Log("GameMain Awake");
 		}
 
-		private void Start() {
+		private async void Start() {
 			Debug.Log("GameMain Start");
 
 			//start_game
-			UniTask.Create(start_game);
+			//TODO 把启动加载hotfix流程搬到单独模块实现
+			await start_game();
 		}
+
+		#region 启动加载hotfix
 
 		private void editor_load_hotfix() {
 			foreach (var dll in hotfixDlls) {
@@ -45,7 +48,9 @@ namespace Aot.core {
 		private async UniTask app_load_hotfix() {
 			foreach (var dll in hotfixDlls) {
 				try {
-					var bytes = (await UnityWebRequest.Get(Path.Combine(Application.streamingAssetsPath, $"ams/hotfix/{dll}.dll")).SendWebRequest()).downloadHandler.data;
+					//TODO 临时读取StreamingAssets下的dll
+					var path = Path.Combine(Application.streamingAssetsPath, $"asm/hotfix/{dll}.dll");
+					var bytes = (await UnityWebRequest.Get(path).SendWebRequest()).downloadHandler.data;
 					var ass = Assembly.Load(bytes);
 					Debugger.Log("app_load_hotfix: " + dll);
 					_assemblies.TryAdd(dll, ass);
@@ -73,6 +78,8 @@ namespace Aot.core {
 			}
 		}
 
+		#endregion
+
 		private async UniTask start_game() {
 			Debugger.Log("start_game");
 #if UNITY_EDITOR
@@ -80,7 +87,6 @@ namespace Aot.core {
 #else
 			await app_load_hotfix();
 #endif
-
 			await start_hotfix();
 		}
 	}

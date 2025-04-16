@@ -10,9 +10,11 @@ namespace HotFix.core {
 			}
 
 			string directoryName = Path.GetDirectoryName(dst);
-			if (string.IsNullOrEmpty(directoryName) || Directory.Exists(directoryName))
-				return;
-			Directory.CreateDirectory(directoryName);
+			if (!Directory.Exists(directoryName)) {
+				Directory.CreateDirectory(directoryName);
+			}
+			src = Path.GetFullPath(src);
+			dst = Path.GetFullPath(dst);
 			File.Copy(src, dst, true);
 		}
 	}

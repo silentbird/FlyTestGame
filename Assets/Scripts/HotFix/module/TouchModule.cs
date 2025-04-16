@@ -1,12 +1,6 @@
 namespace HotFix.module {
-	public class TouchModule : IModuleBase {
+	public class TouchModule : ModuleBase {
 		public void Init() {
-		}
-
-		public void Start() {
-		}
-
-		public void Update() {
 		}
 	}
 }
